@@ -28,6 +28,7 @@ function Uploade() {
           'Content-Type': 'multipart/form-data',
         },
       });
+
       setResult(response.data.response);
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -41,46 +42,45 @@ function Uploade() {
     setIsExpanded(!isExpanded);
   };
 
-
-  const getShortResponse = (response:string) => {
+  const getShortResponse = (response:any) => {
     return response.length > 200 ? response.substring(0, 200) + '... [Read more]' : response;
   };
 
   return (
-    <div className='bg-blue-700 h-[90vh] text-center'>
+    <div className='bg-blue-700 min-h-screen text-center px-4 py-8'>
       <div>
-        <h1 className="text-white text-6xl text center pt-[8rem]">Finally understand your medical notes</h1>
-        <h3 className="text-white text-3xl mt-6">Securly translate medical note into plain english</h3>
+        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl pt-4">Finally understand your medical notes</h1>
+        <h3 className="text-white text-xl sm:text-2xl md:text-3xl mt-4">Securely translate medical notes into plain English</h3>
       </div>
-      <div className='flex flex-row pt-[15rem] justify-around'>
-        <div className='bg-white h-96 w-[700px] rounded-lg shadow-2xl'>
-          <h2 className="text-xl font-medium flex justify-start mx-14 m-2">Medical Note</h2>
+      <div className='flex flex-col lg:flex-row items-center justify-center gap-4 pt-8'>
+        <div className='bg-white h-auto w-full max-w-lg rounded-lg shadow-2xl p-4'>
+          <h2 className="text-xl font-medium mb-2">Medical Note</h2>
           <textarea
-            className="rounded-lg mt-2 border px-2 outline-none"
+            className="w-full rounded-lg mt-2 border px-2 py-2 outline-none resize-none"
             name="note"
             id="notes"
             placeholder="Type or Paste your report..."
-            cols={75}
+            cols={50}
             rows={5}
           ></textarea>
           <input
             type="file"
             onChange={handleFileChange}
-            className="mx-14 mt-2"
+            className="mt-2"
           />
-          <div className="bg-slate-100 my-4 mx-14 rounded-lg hover:bg-slate-200 cursor-pointer">
-            <button className="p-3 font-semibold" onClick={handleUpload}>
+          <div className="bg-slate-100 my-4 rounded-lg hover:bg-slate-200 cursor-pointer">
+            <button className="w-full p-3 font-semibold" onClick={handleUpload}>
               <span className="material-symbols-outlined">arrow_upward</span> Upload
             </button>
           </div>
-          <div className="flex mx-14 bg-gray-100 p-1">Keep the file size less than 2 mb</div>
+          <div className="bg-gray-100 p-1">Keep the file size less than 2 MB</div>
         </div>
-        <div className='bg-white h-96 w-[700px] rounded-lg shadow-2xl overflow-y-auto relative'>
-          <h1 className='text-2xl font-semibold'>Translation</h1>
-          <div className="text-black p-4">
+        <div className='bg-white h-auto w-full max-w-lg rounded-lg shadow-2xl p-4 relative'>
+          <h1 className="text-xl">Translation</h1>
+          <div className="text-black mt-2">
             {isLoading ? (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="loader">Loading...</div>
+                <div className="loader mt-2">Loading...</div> 
               </div>
             ) : (
               <div>
